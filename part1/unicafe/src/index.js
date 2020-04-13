@@ -3,17 +3,27 @@ import ReactDOM from 'react-dom'
 
 const Button = ({ onClick, text }) => (<button onClick={onClick}> {text} </button>)
 
+const Statistic = ({ text, value }) => <p>{text}{value}</p>
+
 const Statistics = ({good, neutral, bad}) => {
-  console.log(good, neutral, bad)
+  if (good+neutral+bad === 0) {
+    return (
+    <>
+    <h1>Statistics</h1>
+    <p>No feedback given</p>
+    </>
+    )
+  }
+
   return (
     <>
     <h1>Statistics</h1>
-    <p>Good {good}</p>
-    <p>Neutral {neutral}</p>
-    <p>Bad {bad}</p>
-    <p>All {good+neutral+bad}</p>
-    <p>Average {(good * 1 + bad * (-1)) / (good+neutral+bad)}</p>
-    <p>Positive {good * 100 / (good+neutral+bad)}%</p> */}
+    <Statistic text="Good " value={good} />
+    <Statistic text="Neutral " value={neutral} />
+    <Statistic text="Bad " value={bad} />
+    <Statistic text="All " value={good+neutral+bad} />
+    <Statistic text="Average " value={(good * 1 + bad * (-1)) / (good+neutral+bad)} />
+    <Statistic text="Positive " value={good * 100 / (good+neutral+bad) +"%"} />
     </>
   )
 }
