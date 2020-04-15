@@ -1,29 +1,35 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+let ary = new Uint8Array(6)
+
 const App = (props) => {
-  const [selected, setSelected] = useState(0)
+  
+  const [selected, setSelected] = useState(0)    
 
   const doRandom = () => {
     
     const randNum =  Math.floor(Math.random() * anecdotes.length)
-    //console.log(randNum, ' is a ', typeof(randNum))    
-    //const randText = anecdotes[Math.floor(Math.random() * anecdotes.length)]          
-    //console.log(randText, ' is a ', typeof(randText))
+    setSelected(randNum)    
+  }
 
-    setSelected(randNum)
-
+  const doVote = () => 
+  {
+    const aryCopy = [...ary]
+    aryCopy[selected] +=1    
+    ary = [...aryCopy]
+    console.log(ary)
   }
 
   return (
-    <div>
+    <div>      
     <h1>Random Anecdote</h1>
     <p>{props.anecdotes[selected]}</p>
     <button onClick={doRandom}>Another!</button>
+    <button onClick={doVote}>Vote!</button>
     </div>
   )
 }
-
 
 const anecdotes = [
   'If it hurts, do it more often',
@@ -35,6 +41,6 @@ const anecdotes = [
 ]  
 
 ReactDOM.render(
-  <App anecdotes={anecdotes} />,
+  <App anecdotes={anecdotes}/>,
   document.getElementById('root')
 )
