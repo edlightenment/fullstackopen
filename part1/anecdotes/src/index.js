@@ -12,13 +12,27 @@ const App = (props) => {
     const randNum =  Math.floor(Math.random() * anecdotes.length)
     setSelected(randNum)    
   }
-
+  
   const doVote = () => 
   {
     const aryCopy = [...ary]
     aryCopy[selected] +=1    
     ary = [...aryCopy]
-    console.log(ary)
+    console.log(ary)   
+  }
+
+  const MostPopular = () =>
+  {
+    let highVote = (Math.max(...ary))
+    let voteNumber = ary.indexOf(highVote)
+    //console.log('highvote is ', highVote)
+    //console.log('index of is ',ary.indexOf(highVote))
+    return (
+      <>
+      <p>{anecdotes[voteNumber]} has {highVote}</p>
+      </>
+      )
+      
   }
 
   return (
@@ -27,6 +41,8 @@ const App = (props) => {
     <p>{props.anecdotes[selected]}</p>
     <button onClick={doRandom}>Another!</button>
     <button onClick={doVote}>Vote!</button>
+    <h1>Most Popular Anecdote</h1>
+    <MostPopular />
     </div>
   )
 }
