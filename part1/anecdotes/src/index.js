@@ -4,12 +4,26 @@ import ReactDOM from 'react-dom'
 const App = (props) => {
   const [selected, setSelected] = useState(0)
 
+  const doRandom = () => {
+    
+    const randNum =  Math.floor(Math.random() * anecdotes.length)
+    //console.log(randNum, ' is a ', typeof(randNum))    
+    //const randText = anecdotes[Math.floor(Math.random() * anecdotes.length)]          
+    //console.log(randText, ' is a ', typeof(randText))
+
+    setSelected(randNum)
+
+  }
+
   return (
     <div>
-      {props.anecdotes[selected]}
+    <h1>Random Anecdote</h1>
+    <p>{props.anecdotes[selected]}</p>
+    <button onClick={doRandom}>Another!</button>
     </div>
   )
 }
+
 
 const anecdotes = [
   'If it hurts, do it more often',
@@ -18,7 +32,7 @@ const anecdotes = [
   'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
   'Premature optimization is the root of all evil.',
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
-]
+]  
 
 ReactDOM.render(
   <App anecdotes={anecdotes} />,
